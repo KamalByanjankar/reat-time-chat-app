@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar/Sidebar/Sidebar';
 
 import './App.css';
 
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router} from 'react-router-dom'
 
 function App() {
   const [user, setUser] = useState(null)
