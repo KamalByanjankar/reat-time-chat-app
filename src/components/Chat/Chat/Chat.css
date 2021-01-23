@@ -1,0 +1,10 @@
+.chat {
+  flex: 0.765;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat__content {
+  flex: 0.75;
+  border-right: 1px solid rgb(226, 226, 226);
+}
