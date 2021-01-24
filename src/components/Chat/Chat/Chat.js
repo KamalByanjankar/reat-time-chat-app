@@ -15,7 +15,6 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 
 function Chat() {
 
-
     return (
         <div className="chat">
             <div className="chat__content">
