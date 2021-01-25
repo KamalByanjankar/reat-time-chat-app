@@ -27,7 +27,7 @@ function Chat() {
 
     useEffect(() => {
         if(roomId){
-            db.collection('rooms').doc(roomId).onSnapshot((snapshot) => setRoomName(snapshot.data().name))
+            db.collection('rooms').doc(roomId).onSnapshot((snapshot) => setRoomName(snapshot.data()?.name))
 
             db.collection("rooms").doc(roomId).collection("messages").orderBy('timestamp', 'asc').onSnapshot((snapshot) =>(setMessages(snapshot.docs.map((doc) => doc.data())
             )))
@@ -39,7 +39,7 @@ function Chat() {
         e.preventDefault()
         db.collection('rooms').doc(roomId).collection('messages').add({
             message: input,
-            name: 'kamal',
+            name: user.displayName,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         })
 
@@ -61,7 +61,7 @@ function Chat() {
                 
                 <div className="chat__body">
                     {messages.map((message, index) => (
-                        <p key={index} className={`chat__message ${true && "chat__receiver"}`}>
+                        <p key={index} className={`chat__message ${message.name === user.displayName && "chat__receiver"}`}>
                             {message.message}
                         </p>
                     ))}

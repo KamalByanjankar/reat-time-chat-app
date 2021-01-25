@@ -5,12 +5,13 @@ import VideoCallIcon from '@material-ui/icons/VideoCall'
 import LaunchIcon from '@material-ui/icons/Launch'
 import SearchIcon from '@material-ui/icons/Search'
 import SidebarChat from '../SidebarChat/SidebarChat.js'
-
+import {useStateValue} from '../../../context/StateProvider'
 import './Sidebar.css'
 import db from '../../../context/firebase.js'
 
 function Sidebar() {
     const [rooms, setRooms] = useState([])
+    const [{user}] = useStateValue()
 
     useEffect(() => {
         const unsubscribe = db.collection('rooms').onSnapshot(snapshot => (
@@ -30,7 +31,7 @@ function Sidebar() {
     return (
         <div className="sidebar">
             <div className="sidebar__header">
-                <Avatar />
+                <Avatar src={user?.photoURL} alt="Profile"/>
                 <h1>Chats</h1>
                 <div className="sidebar__headerIcons">
                     <IconButton>
