@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Chat.css'
 import ChatInfo from '../ChatInfo/ChatInfo'
 import { Avatar } from '@material-ui/core'
@@ -11,9 +11,17 @@ import DescriptionIcon from '@material-ui/icons/Description'
 import GifIcon from '@material-ui/icons/Gif'
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import db from '../../../context/firebase'
 
 
 function Chat() {
+    const [input, setInput] = useState('')
+
+    const sendMessage = (e) => {
+        e.preventDefault()
+        
+        setInput('')
+    }
 
     return (
         <div className="chat">
@@ -29,8 +37,7 @@ function Chat() {
                 </div>
                 
                 <div className="chat__body">
-                    <p className="chat__message && chat__receiver">Hello. Thank you for coming.</p>
-                    <p className="chat__message">Hello. Thank you for coming.Hello. Thank you for coming.Hello. Thank you for coming.Hello. Thank you for coming.</p>
+                    <p className={`chat__message ${true && "chat__receiver"}`}>Let's complete this today</p>
                 </div>
 
                 <div className="chat__footer">
@@ -39,8 +46,13 @@ function Chat() {
                     <DescriptionIcon />
                     <GifIcon />
                     <form>
-                        <input type="text" placeholder="Aa" />
-                        <button>Submit</button>
+                        <input 
+                            type="text" 
+                            placeholder="Aa" 
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}    
+                        />
+                        <button onClick={sendMessage}>Submit</button>
                     </form>
                     <EmojiEmotionsIcon />
                     <ThumbUpIcon />
