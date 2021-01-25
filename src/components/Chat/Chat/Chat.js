@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './Chat.css'
 import ChatInfo from '../ChatInfo/ChatInfo'
 import { Avatar } from '@material-ui/core'
@@ -12,14 +12,37 @@ import GifIcon from '@material-ui/icons/Gif'
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import db from '../../../context/firebase'
+import { useParams } from 'react-router-dom'
+import { useStateValue } from '../../../context/StateProvider'
+import firebase from 'firebase/app'
 
 
 function Chat() {
     const [input, setInput] = useState('')
+    const {roomId} = useParams()
+    const [roomName, setRoomName] = useState('')
+    const [messages, setMessages] = useState([])
+    const [{user}] = useStateValue()
+
+
+    useEffect(() => {
+        if(roomId){
+            db.collection('rooms').doc(roomId).onSnapshot((snapshot) => setRoomName(snapshot.data().name))
+
+            db.collection("rooms").doc(roomId).collection("messages").orderBy('timestamp', 'asc').onSnapshot((snapshot) =>(setMessages(snapshot.docs.map((doc) => doc.data())
+            )))
+                
+        }
+    }, [roomId])
 
     const sendMessage = (e) => {
         e.preventDefault()
-        
+        db.collection('rooms').doc(roomId).collection('messages').add({
+            message: input,
+            name: 'kamal',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+
         setInput('')
     }
 
@@ -28,7 +51,7 @@ function Chat() {
             <div className="chat__content">
                 <div className="chat__header">
                     <Avatar />
-                    <p>Name</p>
+                    <p>{roomName}</p>
                     <div className="chat__headerIcons">
                         <CallIcon />
                         <VideocamIcon />
@@ -37,7 +60,11 @@ function Chat() {
                 </div>
                 
                 <div className="chat__body">
-                    <p className={`chat__message ${true && "chat__receiver"}`}>Let's complete this today</p>
+                    {messages.map((message, index) => (
+                        <p key={index} className={`chat__message ${true && "chat__receiver"}`}>
+                            {message.message}
+                        </p>
+                    ))}
                 </div>
 
                 <div className="chat__footer">
