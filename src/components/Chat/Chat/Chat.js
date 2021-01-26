@@ -23,6 +23,7 @@ function Chat() {
     const [roomName, setRoomName] = useState('')
     const [messages, setMessages] = useState([])
     const [{user}] = useStateValue()
+    const [showInfo, setShowInfo] = useState(true)
 
 
     useEffect(() => {
@@ -46,6 +47,10 @@ function Chat() {
         setInput('')
     }
 
+    const infoHandler = () => {
+        setShowInfo(prevState => (!prevState))
+    }
+
     return (
         <div className="chat">
             <div className="chat__content">
@@ -55,7 +60,7 @@ function Chat() {
                     <div className="chat__headerIcons">
                         <CallIcon />
                         <VideocamIcon />
-                        <InfoIcon />
+                        <InfoIcon onClick={infoHandler}/>
                     </div>
                 </div>
                 
@@ -85,10 +90,14 @@ function Chat() {
                     <ThumbUpIcon />
                 </div>
             </div>
-
-            <div className="chatInfo">
-                <ChatInfo />
-            </div>
+            {
+                showInfo ? (
+                    <div className="chat__info">
+                        <ChatInfo />
+                    </div>
+                ) : ('')
+            }
+            
         </div>
     )
 }
