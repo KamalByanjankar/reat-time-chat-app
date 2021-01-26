@@ -5,6 +5,7 @@ import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import { useStateValue } from './context/StateProvider';
 import Chat from './components/Chat/Chat/Chat';
+import HomeScreen from './components/HomeScreen/HomeScreen';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
                   <Chat />
                 </Route>
                 <Route exact path="/">
-                  <Chat />
+                  <HomeScreen />
                 </Route>
               </Switch>
 

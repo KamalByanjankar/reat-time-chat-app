@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react'
 import { Avatar } from '@material-ui/core'
 import './SidebarChat.css'
 import db from '../../../context/firebase'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 
 function SidebarChat({name, addNewchat, id}) {
     const [messages, setMessages] = useState('')
+    const history = useHistory()
 
     useEffect(() => {
         if(id){
@@ -24,6 +25,8 @@ function SidebarChat({name, addNewchat, id}) {
                 name: roomName,
             })
         }
+
+        history.push("/")
     }
 
     return addNewchat ? (

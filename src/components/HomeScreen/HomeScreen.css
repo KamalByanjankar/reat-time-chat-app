@@ -1,0 +1,23 @@
+.homeScreen {
+  flex: 0.5;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.homeScreen__container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  left: 200px;
+}
+
+.homeScreen__container > img {
+  display: flex;
+  width: 350px;
+}
+
+.homeScreen__container > p {
+  color: gray;
+}
