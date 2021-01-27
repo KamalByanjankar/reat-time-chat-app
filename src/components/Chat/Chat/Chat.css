@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px;
+  padding: 14px;
   border-bottom: 1px solid rgb(226, 226, 226);
   box-shadow: 0 0px 2px rgb(226, 226, 226);
 }
@@ -79,7 +79,7 @@
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  padding: 7px;
+  padding: 0 7px;
 }
 
 .chat__footer > form {
@@ -110,5 +110,5 @@
 
 .chat__info {
   flex: 0.49;
-  padding: 6px 0 0 15px;
+  padding: 7px;
 }

@@ -17,23 +17,13 @@ function ChatInfo() {
     return (
         <div className="chatInfo">
             <Avatar />
-            <p>{roomName}</p>
+            <p className="chatInfo__roomName">{roomName}</p>
             <div className="chatInfo__details">
-                <div>
-                    <p>Customise chat</p>
-                </div>
-                <div>
-                    <p>Group options</p>
-                </div>
-                <div >
-                    <p>Chat members</p>
-                </div>
-                <div>
-                    <p>Privacy and support</p>
-                </div>
-                <div>
-                    <p>Shared photos</p>
-                </div>
+                <p>Customise chat</p>
+                <p>Group options</p>
+                <p>Chat members</p>
+                <p>Privacy and support</p>
+                <p>Shared photos</p>
             </div>
         </div>
     )

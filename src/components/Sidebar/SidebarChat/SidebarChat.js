@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react'
-import { Avatar } from '@material-ui/core'
+import { Avatar, IconButton } from '@material-ui/core'
 import './SidebarChat.css'
 import db from '../../../context/firebase'
 import { Link, useHistory } from 'react-router-dom'
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 
 
 function SidebarChat({name, addNewchat, id}) {
     const [messages, setMessages] = useState('')
     const history = useHistory()
+    const [isShown, setIsShown] = useState(false)
 
     useEffect(() => {
         if(id){
@@ -29,21 +31,38 @@ function SidebarChat({name, addNewchat, id}) {
         history.push("/")
     }
 
+    const deleteRoomHandler = () => {
+        db.collection("rooms").doc(id).delete()
+        history.push("/")
+    }
+
     return addNewchat ? (
         <div className="sidebarChat" onClick={createChat}>
             <h2>Add new Chat</h2>
         </div>
     ) : 
     (
-        <Link to={`/rooms/${id}`}>
+        <>
+        <Link to={`/rooms/${id}`}
+            onMouseEnter={() => setIsShown(true)}
+            onMouseLeave={() => setIsShown(false)}
+        >
             <div className="sidebarChat">
                 <Avatar />
                 <div className="sidebarChat__contents">
                     <h3>{name}</h3>
                     <p>{messages[0]?.message}</p>
                 </div>
+                {isShown && (
+                    <div className="sidebarChat__hoverIcon" onClick={deleteRoomHandler}>
+                        <IconButton>
+                            <MoreHorizIcon />
+                        </IconButton>
+                    </div>)
+                }
             </div>
         </Link>
+        </>
     )
 }
 
