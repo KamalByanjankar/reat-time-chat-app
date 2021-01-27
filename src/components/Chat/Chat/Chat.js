@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import './Chat.css'
 import ChatInfo from '../ChatInfo/ChatInfo'
 import { Avatar } from '@material-ui/core'
@@ -24,6 +24,7 @@ function Chat() {
     const [messages, setMessages] = useState([])
     const [{user}] = useStateValue()
     const [showInfo, setShowInfo] = useState(true)
+    const messagesEndRef = useRef(null)
 
 
     useEffect(() => {
@@ -35,6 +36,10 @@ function Chat() {
                 
         }
     }, [roomId])
+
+    useEffect(() => {
+        messagesEndRef.current.scrollIntoView({behavior: "auto"})
+    }, [messages])
 
     const sendMessage = (e) => {
         e.preventDefault()
@@ -65,12 +70,13 @@ function Chat() {
                 </div>
                 
                 <div className="chat__body">
-                    {messages.map((message, index) => (
-                        <p key={index} className={`chat__message ${message.name === user.displayName && "chat__receiver"}`}>
+                    {messages.map((message) => (
+                        <p key={message} className={`chat__message ${message.name === user.displayName && "chat__receiver"}`}>
                             <span className={`chat__name ${message.name === user.displayName && "chat__noname"}`}>{message.name}</span>
                             {message.message}
                         </p>
                     ))}
+                    <div ref={messagesEndRef} />
                 </div>
 
                 <div className="chat__footer">
@@ -85,7 +91,7 @@ function Chat() {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}    
                         />
-                        <button onClick={sendMessage}>Submit</button>
+                        <button disabled={!input} onClick={sendMessage}>Submit</button>
                     </form>
                     <EmojiEmotionsIcon />
                     <ThumbUpIcon />
