@@ -9,6 +9,7 @@ import './Login.css'
 function Login() {
     const [ , dispatch] = useStateValue();
 
+
     const signInHandler = () => (
         auth.signInWithPopup(provider)
         .then((result) => {
@@ -19,6 +20,7 @@ function Login() {
         })
         .catch((error) => alert(error.message))
     )
+    
     
     return (
         <div className="login">

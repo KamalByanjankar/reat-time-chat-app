@@ -10,12 +10,13 @@
   flex-direction: column;
   text-align: center;
   position: relative;
-  left: 200px;
+  left: 150px;
 }
 
 .homeScreen__container > img {
   display: flex;
   width: 350px;
+  object-fit: contain;
 }
 
 .homeScreen__container > p {

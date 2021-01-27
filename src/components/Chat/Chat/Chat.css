@@ -47,18 +47,31 @@
 }
 
 .chat__message {
-  margin: 0 0 10px 22px;
+  margin: 0 0 20px 22px;
   background-color: rgb(235, 235, 235);
   padding: 8px 12px;
   border-radius: 20px;
   width: fit-content;
   max-width: 550px;
+  position: relative;
 }
 
 .chat__receiver {
   margin-left: auto;
   background-color: #6a6aff;
   color: white;
+}
+
+.chat__name {
+  position: absolute;
+  color: gray;
+  top: -15px;
+  font-size: x-small;
+  min-width: 200px;
+}
+
+.chat__noname {
+  display: none;
 }
 
 .chat__footer {

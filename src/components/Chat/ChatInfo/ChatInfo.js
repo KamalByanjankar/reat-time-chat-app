@@ -5,6 +5,7 @@ import './ChatInfo.css'
 import db from '../../../context/firebase'
 
 
+
 function ChatInfo() {
     const {roomId} = useParams()
     const [roomName, setRoomName] = useState('')
@@ -19,7 +20,13 @@ function ChatInfo() {
             <p>{roomName}</p>
             <div className="chatInfo__details">
                 <div>
-                    <p>Customise Chat</p>
+                    <p>Customise chat</p>
+                </div>
+                <div>
+                    <p>Group options</p>
+                </div>
+                <div >
+                    <p>Chat members</p>
                 </div>
                 <div>
                     <p>Privacy and support</p>
