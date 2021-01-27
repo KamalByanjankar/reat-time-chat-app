@@ -10,7 +10,7 @@ import ImageIcon from '@material-ui/icons/Image'
 import DescriptionIcon from '@material-ui/icons/Description'
 import GifIcon from '@material-ui/icons/Gif'
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import db from '../../../context/firebase'
 import { useParams } from 'react-router-dom'
 import { useStateValue } from '../../../context/StateProvider'
@@ -97,7 +97,7 @@ function Chat() {
                         <button disabled={!input} onClick={sendMessage}>Submit</button>
                     </form>
                     <EmojiEmotionsIcon />
-                    <ThumbUpIcon />
+                    <ThumbUpAltIcon />
                 </div>
             </div>
             {

@@ -33,7 +33,7 @@ function SidebarChat({name, addNewchat, id}) {
 
     const deleteRoomHandler = () => {
         db.collection("rooms").doc(id).delete()
-        history.push("/")
+        setMessages('')
     }
 
     return addNewchat ? (
