@@ -45,15 +45,29 @@ a {
   text-overflow: ellipsis;
 }
 
-/* .sidebarChat__hoverIcon {
-  position: absolute;
-  top: 220px;
-  left: 280px;
-} */
-
 .sidebarChat__hoverIcon > .MuiIconButton-root {
   background-color: white !important;
   width: 40px;
   height: 40px;
   border: 1px solid lightgray;
+}
+
+@media (max-width: 900px) {
+  .sidebarChat {
+    width: 60px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .sidebarChat__h2 {
+    width: 20px;
+    overflow: hidden;
+  }
+
+  .sidebarChat__contents > p {
+    display: none;
+  }
+
+  .sidebarChat__contents > h3 {
+    display: none;
+  }
 }

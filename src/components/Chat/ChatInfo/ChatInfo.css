@@ -30,3 +30,9 @@
   width: 92%;
   border-radius: 5px;
 }
+
+@media (max-width: 750px) {
+  .chatInfo {
+    flex: 1;
+  }
+}

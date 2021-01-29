@@ -70,3 +70,26 @@
 .sidebar__chats {
   overflow: auto;
 }
+
+@media (max-width: 900px) {
+  .sidebar {
+    flex: 0.1;
+  }
+
+  .sidebar__header {
+    display: none;
+  }
+
+  .sidebar__search {
+    margin-top: 13px;
+    width: 85%;
+  }
+
+  .sidebar__searchContainer {
+    padding-left: 2px;
+  }
+
+  .sidebar__searchContainer > input {
+    width: 26%;
+  }
+}
