@@ -84,12 +84,14 @@
 .chat__footer > form {
   flex: 1;
   display: flex;
+  background-color: rgb(243, 243, 243);
+  align-items: center;
+  border-radius: 20px;
+  padding: 7px;
 }
 
 .chat__footer > form > input {
   flex: 1;
-  border-radius: 20px;
-  padding: 10px;
   border: none;
   outline: none;
   font-size: 14px;
@@ -100,9 +102,19 @@
   display: none;
 }
 
+.chat__footer > form > .MuiSvgIcon-root {
+  color: blue;
+  cursor: pointer;
+}
+
 .chat__footer > .MuiSvgIcon-root {
-  font-size: 25px;
-  margin-right: 5px;
+  margin-left: 15px;
+}
+
+.chat__footer > .MuiIconButton-root {
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
   color: blue;
   cursor: pointer;
 }

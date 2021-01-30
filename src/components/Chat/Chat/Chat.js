@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import './Chat.css'
 import ChatInfo from '../ChatInfo/ChatInfo'
-import { Avatar } from '@material-ui/core'
+import { Avatar, IconButton } from '@material-ui/core'
 import CallIcon from '@material-ui/icons/Call'
 import VideocamIcon from '@material-ui/icons/Videocam'
 import InfoIcon from '@material-ui/icons/Info'
@@ -83,10 +83,18 @@ function Chat() {
                 </div>
 
                 <div className="chat__footer">
-                    <ControlPointIcon />
-                    <ImageIcon />
-                    <DescriptionIcon />
-                    <GifIcon />
+                    <IconButton>
+                        <ControlPointIcon />
+                    </IconButton>
+                    <IconButton>
+                        <ImageIcon />
+                    </IconButton>
+                    <IconButton>
+                        <DescriptionIcon />
+                    </IconButton>
+                    <IconButton>
+                        <GifIcon />
+                    </IconButton>
                     <form>
                         <input 
                             type="text" 
@@ -95,9 +103,11 @@ function Chat() {
                             onChange={(e) => setInput(e.target.value)}    
                         />
                         <button disabled={!input} onClick={sendMessage}>Submit</button>
+                        <EmojiEmotionsIcon />
                     </form>
-                    <EmojiEmotionsIcon />
-                    <ThumbUpAltIcon />
+                    <IconButton>
+                        <ThumbUpAltIcon />
+                    </IconButton>
                 </div>
             </div>
             {
