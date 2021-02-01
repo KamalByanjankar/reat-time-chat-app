@@ -50,7 +50,20 @@ a {
   width: 40px;
   height: 40px;
   border: 1px solid lightgray;
+  position: relative;
 }
+
+/* .sidebarChat__menu {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 30px;
+  position: absolute;
+}
+
+.sidebarChat__menu > p {
+  width: 300px;
+} */
 
 @media (max-width: 900px) {
   .sidebarChat {

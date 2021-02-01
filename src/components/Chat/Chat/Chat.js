@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import './Chat.css'
 import ChatInfo from '../ChatInfo/ChatInfo'
-import { Avatar, IconButton } from '@material-ui/core'
+import { Avatar, IconButton, Tooltip } from '@material-ui/core'
 import CallIcon from '@material-ui/icons/Call'
 import VideocamIcon from '@material-ui/icons/Videocam'
 import InfoIcon from '@material-ui/icons/Info'
@@ -15,6 +15,7 @@ import db from '../../../context/firebase'
 import { useParams } from 'react-router-dom'
 import { useStateValue } from '../../../context/StateProvider'
 import firebase from 'firebase/app'
+import ReactTooltip from 'react-tooltip'
 
 
 function Chat() {
@@ -56,16 +57,28 @@ function Chat() {
         setShowInfo(prevState => (!prevState))
     }
 
+
     return (
         <div className="chat">
             <div className="chat__content">
                 <div className="chat__header">
                     <Avatar />
                     <p>{roomName}</p>
-                    <div className="chat__headerIcons">
-                        <CallIcon />
-                        <VideocamIcon />
-                        <InfoIcon onClick={infoHandler}/>
+                    <div className="chat__headerIcons">    
+                        <CallIcon data-tip data-for="voiceCall" />
+                        <ReactTooltip id="voiceCall" place="bottom" effect="solid">
+                            Start a voice call
+                        </ReactTooltip>
+
+                        <VideocamIcon data-tip data-for="videoCall" />
+                            <ReactTooltip id="videoCall" place="bottom" effect="solid">
+                                Start a video call
+                            </ReactTooltip>
+                        
+                        <InfoIcon onClick={infoHandler} data-tip data-for="infoIcon" />
+                            <ReactTooltip id="infoIcon" place="bottom" effect="solid">
+                                Conversation information
+                            </ReactTooltip>
                     </div>
                 </div>
                 
@@ -100,9 +113,14 @@ function Chat() {
                             type="text" 
                             placeholder="Aa" 
                             value={input}
-                            onChange={(e) => setInput(e.target.value)}    
+                            onChange={(e) => setInput(e.target.value)} 
+                            autoFocus   
                         />
-                        <button disabled={!input} onClick={sendMessage}>Submit</button>
+                        <button 
+                            disabled={!input} 
+                            onClick={sendMessage}
+                        >Submit
+                        </button>
                         <EmojiEmotionsIcon />
                     </form>
                     <IconButton>

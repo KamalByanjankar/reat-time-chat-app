@@ -10,6 +10,6 @@ ReactDOM.render(
     <StateProvider reducer={reducer} initialState={initialState}>
       <App />
     </StateProvider>
-  </React.StrictMode>,
+   </React.StrictMode>,
   document.getElementById('root')
 );

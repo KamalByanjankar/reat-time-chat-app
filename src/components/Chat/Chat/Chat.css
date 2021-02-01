@@ -87,14 +87,15 @@
   background-color: rgb(243, 243, 243);
   align-items: center;
   border-radius: 20px;
-  padding: 7px;
+  padding: 7px 14px;
+  margin-right: 10px;
 }
 
 .chat__footer > form > input {
   flex: 1;
   border: none;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
   background-color: rgb(243, 243, 243);
 }
 
@@ -105,10 +106,6 @@
 .chat__footer > form > .MuiSvgIcon-root {
   color: blue;
   cursor: pointer;
-}
-
-.chat__footer > .MuiSvgIcon-root {
-  margin-left: 15px;
 }
 
 .chat__footer > .MuiIconButton-root {

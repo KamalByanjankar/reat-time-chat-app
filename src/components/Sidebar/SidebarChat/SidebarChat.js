@@ -9,7 +9,9 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 function SidebarChat({name, addNewchat, id}) {
     const [messages, setMessages] = useState('')
     const history = useHistory()
-    const [isShown, setIsShown] = useState(false)
+    const [isShownOnHover, setIsShownOnHover] = useState(false)
+    const [isDropDown, setIsDropDown] = useState(false)
+
 
     useEffect(() => {
         if(id){
@@ -36,6 +38,10 @@ function SidebarChat({name, addNewchat, id}) {
         setMessages('')
     }
 
+    const onClickHandler = () => {
+        setIsDropDown(prevState => (!prevState))
+    }
+
     return addNewchat ? (
         <div className="sidebarChat" onClick={createChat}>
             <h2>Add new Chat</h2>
@@ -43,25 +49,39 @@ function SidebarChat({name, addNewchat, id}) {
     ) : 
     (
         <>
-        <Link to={`/rooms/${id}`}
-            onMouseEnter={() => setIsShown(true)}
-            onMouseLeave={() => setIsShown(false)}
-        >
-            <div className="sidebarChat">
-                <Avatar />
-                <div className="sidebarChat__contents">
-                    <h3>{name}</h3>
-                    <p>{messages[0]?.message}</p>
+            <Link to={`/rooms/${id}`}
+                onMouseEnter={() => setIsShownOnHover(true)}
+                onMouseLeave={() => setIsShownOnHover(false)}
+            >
+                <div className="sidebarChat">
+                    <Avatar />
+                    <div className="sidebarChat__contents">
+                        <h3>{name}</h3>
+                        <p>{messages[0]?.message}</p>
+                    </div>
+                    {isShownOnHover && (
+                        <div className="sidebarChat__hoverIcon" onClick={onClickHandler}>
+                            <IconButton>
+                                <MoreHorizIcon />
+                            </IconButton>
+                        </div>)
+                    }
                 </div>
-                {isShown && (
-                    <div className="sidebarChat__hoverIcon" onClick={deleteRoomHandler}>
-                        <IconButton>
-                            <MoreHorizIcon />
-                        </IconButton>
-                    </div>)
-                }
-            </div>
-        </Link>
+            </Link>
+            {/* {isDropDown && (
+                <div className="sidebarChat__menu">
+                    <p>Mark as unread</p>
+                    <p>Mute converstaion</p>
+                    <p>View profile</p>
+                    <hr/>
+                    <p>Audio call</p>
+                    <p>Video chat</p>
+                    <hr/>
+                    <p>Hide converstaion</p>
+                    <p onClick={deleteRoomHandler}>Delete converstion</p>
+                </div>
+            )
+            } */}
         </>
     )
 }
