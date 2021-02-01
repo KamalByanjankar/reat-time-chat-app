@@ -4,6 +4,7 @@
   padding: 7px 0 7px 8px;
   margin: 0 8px;
   width: 93%;
+  cursor: pointer;
 }
 
 .sidebarChat:hover {
@@ -50,13 +51,12 @@ a {
   width: 40px;
   height: 40px;
   border: 1px solid lightgray;
-  position: relative;
 }
 
 .sidebarChat__menu {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 8px;
   position: absolute;
   left: 135px;
   z-index: 1;
@@ -68,12 +68,25 @@ a {
 
 .sidebarChat__menu > p {
   width: 325px;
-  padding: 10px;
+  padding: 8px;
   font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
 }
 
-.sidebarChat__menu > p > hr {
-  border: 0.2px solid lightgray;
+.sidebarChat__menu > p > span {
+  margin-right: 10px;
+}
+
+.sidebarChat__menu > p:hover {
+  background-color: rgb(243, 243, 243);
+  border-radius: 5px;
+}
+
+.sidebarChat__menu > hr {
+  border: 0.5px solid lightgray;
+  margin: 5px 0;
 }
 
 @media (max-width: 900px) {

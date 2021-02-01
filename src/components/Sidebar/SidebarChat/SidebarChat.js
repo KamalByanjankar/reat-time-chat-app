@@ -4,6 +4,13 @@ import './SidebarChat.css'
 import db from '../../../context/firebase'
 import { Link, useHistory } from 'react-router-dom'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+import CheckIcon from '@material-ui/icons/Check'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+import PersonIcon from '@material-ui/icons/Person'
+import CallIcon from '@material-ui/icons/Call'
+import VideocamIcon from '@material-ui/icons/Videocam'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import DeleteIcon from '@material-ui/icons/Delete'
 
 
 function SidebarChat({name, addNewchat, id}) {
@@ -70,15 +77,15 @@ function SidebarChat({name, addNewchat, id}) {
             </Link>
             {isDropDown && (
                 <div className="sidebarChat__menu">
-                    <p>Mark as unread</p>
-                    <p>Mute converstaion</p>
-                    <p>View profile</p>
-                    <p><hr/></p>
-                    <p>Audio call</p>
-                    <p>Video chat</p>
-                    <p><hr/></p>
-                    <p>Hide converstaion</p>
-                    <p onClick={deleteRoomHandler}>Delete converstion</p>
+                    <p><span><CheckIcon/></span>Mark as unread</p>
+                    <p><span><NotificationsIcon /></span>Mute converstaion</p>
+                    <p><span><PersonIcon /></span>View profile</p>
+                    <hr />
+                    <p><span><CallIcon /></span>Audio call</p>
+                    <p><span><VideocamIcon /></span>Video chat</p>
+                    <hr />
+                    <p><span><DeleteOutlineIcon /></span>Hide converstaion</p>
+                    <p onClick={deleteRoomHandler}><span><DeleteIcon /></span>Delete converstion</p>
                 </div>
             )
             }
