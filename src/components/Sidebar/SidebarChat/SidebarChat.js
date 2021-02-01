@@ -68,20 +68,20 @@ function SidebarChat({name, addNewchat, id}) {
                     }
                 </div>
             </Link>
-            {/* {isDropDown && (
+            {isDropDown && (
                 <div className="sidebarChat__menu">
                     <p>Mark as unread</p>
                     <p>Mute converstaion</p>
                     <p>View profile</p>
-                    <hr/>
+                    <p><hr/></p>
                     <p>Audio call</p>
                     <p>Video chat</p>
-                    <hr/>
+                    <p><hr/></p>
                     <p>Hide converstaion</p>
                     <p onClick={deleteRoomHandler}>Delete converstion</p>
                 </div>
             )
-            } */}
+            }
         </>
     )
 }
