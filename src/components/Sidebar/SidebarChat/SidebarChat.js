@@ -5,6 +5,7 @@ import db from '../../../context/firebase'
 import { Link, useHistory } from 'react-router-dom'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import SidebarChatOptions from '../SidebarChatOptions/SidebarChatOptions'
+import Backdrop from '../../Backdrop/Backdrop'
 
 
 function SidebarChat({name, addNewchat, id}) {
@@ -37,8 +38,11 @@ function SidebarChat({name, addNewchat, id}) {
     }
 
     const onClickHandler = () => {
-        setIsDropDown(prevState => (!prevState))
-        setIsShownOnHover(true)
+        setIsDropDown(prevState => !prevState)
+    }
+
+    const backdropClickedHandler = () => {
+        setIsDropDown(false)
     }
 
 
@@ -73,8 +77,11 @@ function SidebarChat({name, addNewchat, id}) {
                     }
                 </div>
                 {isDropDown && (
-                    <SidebarChatOptions id={id}/>
-                )
+                    <>
+                        <SidebarChatOptions id={id} />
+                        <Backdrop clicked={backdropClickedHandler}/>
+                    </>
+                    )
                 }
             </Link>
         </>
