@@ -26,6 +26,7 @@ function Chat() {
     const [{user}] = useStateValue()
     const [showInfo, setShowInfo] = useState(true)
     const messagesEndRef = useRef(null)
+    const [isShownOnHover, setIsShownOnHover] = useState(false)
 
 
     useEffect(() => {
@@ -84,12 +85,15 @@ function Chat() {
                 
                 <div className="chat__body">
                     {messages.map((message, index) => (
-                        <p 
+                        <p
                             key={index} 
                             className={`chat__message ${message.name === user.displayName && "chat__receiver"}`}
                         >
                             <span className={`chat__name ${message.name === user.displayName && "chat__noname"}`}>{message.name}</span>
                             {message.message}
+
+                            {/* Date and time of message */}
+                            {/* {new Date(message.timestamp?.toDate()).toUTCString()} */}
                         </p>
                     ))}
                     <div ref={messagesEndRef} />
