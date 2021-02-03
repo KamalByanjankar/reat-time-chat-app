@@ -26,14 +26,18 @@ function Chat() {
     const [{user}] = useStateValue()
     const [showInfo, setShowInfo] = useState(true)
     const messagesEndRef = useRef(null)
-    const [isShownOnHover, setIsShownOnHover] = useState(false)
 
 
     useEffect(() => {
         if(roomId){
-            db.collection('rooms').doc(roomId).onSnapshot((snapshot) => setRoomName(snapshot.data()?.name))
+            db.collection('rooms').doc(roomId).onSnapshot((snapshot) => 
+                setRoomName(snapshot.data()?.name)
+                )
 
-            db.collection("rooms").doc(roomId).collection("messages").orderBy('timestamp', 'asc').onSnapshot((snapshot) =>(setMessages(snapshot.docs.map((doc) => doc.data())
+            db.collection("rooms").doc(roomId).collection("messages")
+                .orderBy('timestamp', 'asc')
+                .onSnapshot((snapshot) => (
+                    setMessages(snapshot.docs.map((doc) => doc.data())
             )))
                 
         }
@@ -88,12 +92,25 @@ function Chat() {
                         <p
                             key={index} 
                             className={`chat__message ${message.name === user.displayName && "chat__receiver"}`}
-                        >
-                            <span className={`chat__name ${message.name === user.displayName && "chat__noname"}`}>{message.name}</span>
-                            {message.message}
+                        >      
+                            <span 
+                                className={`chat__name ${message.name === user.displayName && "chat__noname"}`}
+                            >
+                                {message.name}
+                            </span>
 
-                            {/* Date and time of message */}
-                            {/* {new Date(message.timestamp?.toDate()).toUTCString()} */}
+                            <span 
+                                className={`chat__timestampOnHover ${message.name === user.displayName && "chat__timestampReceiver"}`}
+                            >
+                                {message.message}
+                            </span>
+
+                            <span 
+                                className="chat__timestamp"
+                            >
+                                {new Date(message.timestamp?.toDate()).toUTCString()}
+                            </span>
+                        
                         </p>
                     ))}
                     <div ref={messagesEndRef} />
