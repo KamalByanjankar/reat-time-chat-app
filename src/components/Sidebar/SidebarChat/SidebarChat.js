@@ -39,11 +39,14 @@ function SidebarChat({name, addNewchat, id}) {
 
     const onClickHandler = () => {
         setIsDropDown(prevState => !prevState)
+        setIsShownOnHover(true)
     }
 
     const backdropClickedHandler = () => {
         setIsDropDown(false)
+        setIsShownOnHover(false)
     }
+    
 
 
     return addNewchat ? (
@@ -79,7 +82,7 @@ function SidebarChat({name, addNewchat, id}) {
                 {isDropDown && (
                     <>
                         <SidebarChatOptions id={id} />
-                        <Backdrop clicked={backdropClickedHandler}/>
+                        <Backdrop clicked={backdropClickedHandler} />
                     </>
                     )
                 }

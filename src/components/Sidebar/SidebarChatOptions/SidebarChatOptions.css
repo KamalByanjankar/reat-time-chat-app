@@ -4,6 +4,7 @@
   padding: 8px;
   position: absolute;
   left: 135px;
+  margin-top: -10px;
   z-index: 1;
   background-color: white;
   box-sizing: border-box;
