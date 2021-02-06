@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Avatar, IconButton } from '@material-ui/core'
 import './SidebarChat.css'
 import db from '../../../context/firebase'
-import { Link, useHistory } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import SidebarChatOptions from '../SidebarChatOptions/SidebarChatOptions'
 import Backdrop from '../../Backdrop/Backdrop'
@@ -13,7 +13,7 @@ function SidebarChat({name, addNewchat, id}) {
     const history = useHistory()
     const [isShownOnHover, setIsShownOnHover] = useState(false)
     const [isDropDown, setIsDropDown] = useState(false)
- 
+
 
     useEffect(() => {
         if(id){
@@ -37,7 +37,7 @@ function SidebarChat({name, addNewchat, id}) {
         history.push("/")
     }
 
-    const onClickHandler = () => {
+    const handleClick = (e) => {
         setIsDropDown(prevState => !prevState)
         setIsShownOnHover(true)
     }
@@ -46,8 +46,6 @@ function SidebarChat({name, addNewchat, id}) {
         setIsDropDown(false)
         setIsShownOnHover(false)
     }
-    
-
 
     return addNewchat ? (
         <div className="sidebarChat" onClick={createChat}>
@@ -56,7 +54,9 @@ function SidebarChat({name, addNewchat, id}) {
     ) : 
     (
         <>
-            <Link to={`/rooms/${id}`}
+            <NavLink 
+                exact
+                to={`/rooms/${id}`}
                 onMouseEnter={() => setIsShownOnHover(true)}
                 onMouseLeave={() => setIsShownOnHover(false)}
             >
@@ -69,24 +69,25 @@ function SidebarChat({name, addNewchat, id}) {
                         <p>{messages[0]?.message}</p>
                     </div>
                     {isShownOnHover && (
-                        <div 
-                            className="sidebarChat__hoverIcon" 
-                            onClick={onClickHandler}   
+                        <div
+                            className="sidebarChat__hoverIcon"
+                            onClick={handleClick}
                         >
-                            <IconButton>
+                            <IconButton >
                                 <MoreHorizIcon />
                             </IconButton>
                         </div>)
                     }
                 </div>
+                
                 {isDropDown && (
                     <>
-                        <SidebarChatOptions id={id} />
+                        <SidebarChatOptions id={id}/>
                         <Backdrop clicked={backdropClickedHandler} />
                     </>
-                    )
+                    )  
                 }
-            </Link>
+            </NavLink>
         </>
     )
 }

@@ -1,5 +1,5 @@
 .chat {
-  flex: 0.765;
+  flex: 0.755;
   display: flex;
   justify-content: space-between;
 }
@@ -46,6 +46,10 @@
   overflow-x: hidden;
 }
 
+.chat__body > p {
+  position: relative;
+}
+
 .chat__message {
   margin-top: 20px;
   background-color: rgb(235, 235, 235);
@@ -76,27 +80,25 @@
 
 .chat__timestamp {
   display: none;
-  z-index: 1;
   min-width: 210px;
   padding: 8px;
 }
 
 .chat__timestampOnHover:hover + .chat__timestamp {
   display: block;
-  position: absolute;
   box-sizing: border-box;
   background-color: #0e0d0da8;
+  position: absolute;
+  z-index: 1;
   font-size: 14px;
   color: white;
   padding: 5px;
   border-radius: 5px;
-  z-index: 1;
 }
 
 .chat__timestampReceiver:hover + .chat__timestamp {
-  display: block;
+  position: absolute;
   left: -120px;
-  overflow-x: visible;
 }
 
 .chat__footer {
@@ -144,7 +146,6 @@
 
 .chat__info {
   flex: 0.49;
-  padding: 7px;
 }
 
 @media (max-width: 900px) {

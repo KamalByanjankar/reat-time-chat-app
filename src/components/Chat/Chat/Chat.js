@@ -101,6 +101,7 @@ function Chat() {
 
                             <span 
                                 className={`chat__timestampOnHover ${message.name === user.displayName && "chat__timestampReceiver"}`}
+                                
                             >
                                 {message.message}
                             </span>
