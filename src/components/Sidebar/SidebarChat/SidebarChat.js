@@ -1,18 +1,25 @@
 import React, {useState, useEffect} from 'react'
-import { Avatar, IconButton } from '@material-ui/core'
+import { Avatar, IconButton, Popper } from '@material-ui/core'
 import './SidebarChat.css'
 import db from '../../../context/firebase'
 import { NavLink, useHistory } from 'react-router-dom'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import SidebarChatOptions from '../SidebarChatOptions/SidebarChatOptions'
-import Backdrop from '../../Backdrop/Backdrop'
+// import Backdrop from '../../Backdrop/Backdrop'
+
+import CheckIcon from '@material-ui/icons/Check'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+import PersonIcon from '@material-ui/icons/Person'
+import CallIcon from '@material-ui/icons/Call'
+import VideocamIcon from '@material-ui/icons/Videocam'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 
 function SidebarChat({name, addNewchat, id}) {
     const [messages, setMessages] = useState('')
     const history = useHistory()
-    const [isShownOnHover, setIsShownOnHover] = useState(false)
-    const [isDropDown, setIsDropDown] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null)
+
 
 
     useEffect(() => {
@@ -23,6 +30,10 @@ function SidebarChat({name, addNewchat, id}) {
         }
     }, [id])
 
+
+    const deleteRoomHandler = () => {
+        db.collection("rooms").doc(id).delete()
+    }
 
 
     const createChat = () => {
@@ -38,14 +49,15 @@ function SidebarChat({name, addNewchat, id}) {
     }
 
     const handleClick = (e) => {
-        setIsDropDown(prevState => !prevState)
-        setIsShownOnHover(true)
+        setAnchorEl(anchorEl ? null : e.currentTarget);
     }
 
-    const backdropClickedHandler = () => {
-        setIsDropDown(false)
-        setIsShownOnHover(false)
-    }
+    const open = Boolean(anchorEl);
+    const popperId = open ? 'simple-popper' : undefined;
+
+    // const backdropClickedHandler = () => {
+    //     console.log('Backdrop clicked')
+    // }
 
     return addNewchat ? (
         <div className="sidebarChat" onClick={createChat}>
@@ -57,36 +69,40 @@ function SidebarChat({name, addNewchat, id}) {
             <NavLink 
                 exact
                 to={`/rooms/${id}`}
-                onMouseEnter={() => setIsShownOnHover(true)}
-                onMouseLeave={() => setIsShownOnHover(false)}
+                // onMouseEnter={() => setIsShownOnHover(true)}
+                // onMouseLeave={() => setIsShownOnHover(false)}
             >
-                <div 
-                    className="sidebarChat"
-                >
+                <div className="sidebarChat">
                     <Avatar />
                     <div className="sidebarChat__contents">
                         <h3>{name}</h3>
                         <p>{messages[0]?.message}</p>
                     </div>
-                    {isShownOnHover && (
-                        <div
-                            className="sidebarChat__hoverIcon"
-                            onClick={handleClick}
-                        >
-                            <IconButton >
-                                <MoreHorizIcon />
-                            </IconButton>
-                        </div>)
-                    }
+                            
+                
+                    <IconButton
+                        aria-describedby={popperId}
+                        onClick={handleClick}>
+                        <MoreHorizIcon />
+                    </IconButton>
+
+                    <Popper id={popperId} open={open} anchorEl={anchorEl}>
+                        <div className="sidebarChat__menu">
+                            <div><span><CheckIcon/></span>Mark as unread</div>
+                            <div><span><NotificationsIcon /></span>Mute converstaion</div>
+                            <div><span><PersonIcon /></span>View profile</div>
+                            <hr />
+                            <div><span><CallIcon /></span>Audio call</div>
+                            <div><span><VideocamIcon /></span>Video chat</div>
+                            <hr />
+                            <div><span><DeleteOutlineIcon /></span>Hide converstaion</div>
+                            <div onClick={deleteRoomHandler}><span><DeleteIcon /></span>Delete converstion</div>
+                        </div>
+                        {/* <Backdrop clicked={backdropClickedHandler} /> */}
+                    </Popper>
+                    
                 </div>
                 
-                {isDropDown && (
-                    <>
-                        <SidebarChatOptions id={id}/>
-                        <Backdrop clicked={backdropClickedHandler} />
-                    </>
-                    )  
-                }
             </NavLink>
         </>
     )
