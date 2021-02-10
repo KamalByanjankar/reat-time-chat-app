@@ -8,10 +8,12 @@ import SidebarChat from '../SidebarChat/SidebarChat.js'
 import {useStateValue} from '../../../context/StateProvider'
 import './Sidebar.css'
 import db from '../../../context/firebase.js'
+import { useHistory } from 'react-router-dom'
 
 function Sidebar() {
     const [rooms, setRooms] = useState([])
-    const [{user}] = useStateValue()
+    const [{user}, dispatch] = useStateValue()
+    const history = useHistory()
 
     useEffect(() => {
         const unsubscribe = db.collection('rooms').onSnapshot(snapshot => (
@@ -28,6 +30,12 @@ function Sidebar() {
         }
     }, [])
 
+    const handleLogout = () => {
+        dispatch({ type: 'LOGOUT' });
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
+        history.push('/login')
+    }
 
 
     return (
@@ -36,7 +44,7 @@ function Sidebar() {
                 <Avatar src={user?.photoURL} alt="Profile"/>
                 <h1>Chats</h1>
                 <div className="sidebar__headerIcons">
-                    <IconButton>
+                    <IconButton onClick={handleLogout}>
                         <MoreHorizIcon />
                     </IconButton>
                     <IconButton>

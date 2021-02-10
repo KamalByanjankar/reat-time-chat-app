@@ -15,12 +15,19 @@ export const initialState={
 const reducer = (state, action) => {
     switch(action.type){
         case "LOGIN":
-            localStorage.setItem("user", JSON.stringify(action.payload.user))
-            localStorage.setItem("token", JSON.stringify(action.payload.token))
+            // localStorage.setItem("user", JSON.stringify(action.payload.user))
+            // localStorage.setItem("token", JSON.stringify(action.payload.token))
             return{
                 ...state,
                 user: action.payload.user,
                 token: action.payload.token
+            }
+        
+        case "LOGOUT":
+            return{
+                ...state,
+                user: '',
+                token: ''
             }
 
         default:
