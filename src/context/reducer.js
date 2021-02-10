@@ -1,18 +1,26 @@
+let user = localStorage.getItem('currentUser') 
+        ? JSON.parse(localStorage.getItem('currentUser')).user
+        : ''
+
+let token = localStorage.getItem('currentUser')
+        ? JSON.parse(localStorage.getItem('currentUser')).token
+        : ''
+
 export const initialState={
-    user: null
-    // user: "aaa"
+    user: '' || user,
+    token: '' || token,
 }
 
-export const actionTypes = {
-    SET_USER: "SET_USER"
-}
 
 const reducer = (state, action) => {
     switch(action.type){
-        case actionTypes.SET_USER:
+        case "LOGIN":
+            localStorage.setItem("user", JSON.stringify(action.payload.user))
+            localStorage.setItem("token", JSON.stringify(action.payload.token))
             return{
                 ...state,
-                user: action.user
+                user: action.payload.user,
+                token: action.payload.token
             }
 
         default:

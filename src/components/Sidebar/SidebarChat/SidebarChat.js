@@ -74,8 +74,6 @@ function SidebarChat({name, addNewchat, id}) {
                 // onMouseEnter={() => setIsShownOnHover(true)}
                 // onMouseLeave={() => setIsShownOnHover(false)}
             >
-                
-
                 <div className="sidebarChat">
                     <Avatar />
                     <div className="sidebarChat__contents">

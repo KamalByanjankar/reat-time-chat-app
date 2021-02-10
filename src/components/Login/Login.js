@@ -2,7 +2,6 @@ import React from 'react'
 import logo from '../../assets/messenger-logo.jpg'
 import {useStateValue} from '../../context/StateProvider'
 import {auth, provider} from '../../context/firebase'
-import {actionTypes} from '../../context/reducer' 
 
 import './Login.css'
 
@@ -14,8 +13,8 @@ function Login() {
         auth.signInWithPopup(provider)
         .then((result) => {
             dispatch({
-                type: actionTypes.SET_USER,
-                user: result.user,
+                type: 'LOGIN', payload: result,
+                user: localStorage.setItem('currentUser', JSON.stringify(result))
             })
         })
         .catch((error) => alert(error.message))
