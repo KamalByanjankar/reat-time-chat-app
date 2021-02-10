@@ -44,7 +44,7 @@ a {
 }
 
 .sidebarChat > .MuiIconButton-root {
-  display: none !important;
+  display: none;
   position: relative;
   z-index: 1;
 }

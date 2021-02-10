@@ -1,6 +1,6 @@
 export const initialState={
-    // user: null
-    user: "aaa"
+    user: null
+    // user: "aaa"
 }
 
 export const actionTypes = {

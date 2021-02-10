@@ -107,6 +107,7 @@
   align-items: center;
   height: 40px;
   padding: 0 7px;
+  margin-bottom: 5px;
 }
 
 .chat__footer > form {

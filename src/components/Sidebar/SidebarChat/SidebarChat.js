@@ -4,7 +4,7 @@ import './SidebarChat.css'
 import db from '../../../context/firebase'
 import { NavLink, useHistory } from 'react-router-dom'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-// import Backdrop from '../../Backdrop/Backdrop'
+import Backdrop from '../../Backdrop/Backdrop'
 
 import CheckIcon from '@material-ui/icons/Check'
 import NotificationsIcon from '@material-ui/icons/Notifications'
@@ -19,6 +19,7 @@ function SidebarChat({name, addNewchat, id}) {
     const [messages, setMessages] = useState('')
     const history = useHistory()
     const [anchorEl, setAnchorEl] = useState(null)
+    const [open, setOpen] = useState(false)
 
 
 
@@ -49,15 +50,16 @@ function SidebarChat({name, addNewchat, id}) {
     }
 
     const handleClick = (e) => {
-        setAnchorEl(anchorEl ? null : e.currentTarget);
+        setAnchorEl(e.currentTarget)
+        setOpen(prevState => !prevState)
     }
 
-    const open = Boolean(anchorEl);
+    // const open = Boolean(anchorEl);
     const popperId = open ? 'simple-popper' : undefined;
 
-    // const backdropClickedHandler = () => {
-    //     console.log('Backdrop clicked')
-    // }
+    const backdropClickedHandler = () => {
+        setOpen(false)
+    }
 
     return addNewchat ? (
         <div className="sidebarChat" onClick={createChat}>
@@ -72,37 +74,42 @@ function SidebarChat({name, addNewchat, id}) {
                 // onMouseEnter={() => setIsShownOnHover(true)}
                 // onMouseLeave={() => setIsShownOnHover(false)}
             >
+                
+
                 <div className="sidebarChat">
                     <Avatar />
                     <div className="sidebarChat__contents">
                         <h3>{name}</h3>
                         <p>{messages[0]?.message}</p>
                     </div>
-                            
-                
+
                     <IconButton
                         aria-describedby={popperId}
                         onClick={handleClick}>
                         <MoreHorizIcon />
                     </IconButton>
-
-                    <Popper id={popperId} open={open} anchorEl={anchorEl}>
-                        <div className="sidebarChat__menu">
-                            <div><span><CheckIcon/></span>Mark as unread</div>
-                            <div><span><NotificationsIcon /></span>Mute converstaion</div>
-                            <div><span><PersonIcon /></span>View profile</div>
-                            <hr />
-                            <div><span><CallIcon /></span>Audio call</div>
-                            <div><span><VideocamIcon /></span>Video chat</div>
-                            <hr />
-                            <div><span><DeleteOutlineIcon /></span>Hide converstaion</div>
-                            <div onClick={deleteRoomHandler}><span><DeleteIcon /></span>Delete converstion</div>
-                        </div>
-                        {/* <Backdrop clicked={backdropClickedHandler} /> */}
-                    </Popper>
+                   
+                    <div>
+                        {
+                            open ? <Backdrop open={open} clicked={backdropClickedHandler} /> : null
+                        }
                     
+                        <Popper id={popperId} open={open} anchorEl={anchorEl}>
+                            <div className="sidebarChat__menu">
+                                <div><span><CheckIcon/></span>Mark as unread</div>
+                                <div><span><NotificationsIcon /></span>Mute converstaion</div>
+                                <div><span><PersonIcon /></span>View profile</div>
+                                <hr />
+                                <div><span><CallIcon /></span>Audio call</div>
+                                <div><span><VideocamIcon /></span>Video chat</div>
+                                <hr />
+                                <div><span><DeleteOutlineIcon /></span>Hide converstaion</div>
+                                <div onClick={deleteRoomHandler}><span><DeleteIcon /></span>Delete converstion</div>
+                            </div>
+                        </Popper> 
+
+                    </div>                      
                 </div>
-                
             </NavLink>
         </>
     )
