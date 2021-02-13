@@ -37,6 +37,35 @@
   background-color: rgb(228, 228, 228);
 }
 
+.sidebar__headerIconsDropdown {
+  position: absolute;
+  box-shadow: 1px 2px 5px lightgray;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  z-index: 1;
+  background-color: white;
+  left: 215px;
+  top: 75px;
+  width: 350px;
+}
+
+.sidebar__headerIconsDropdown > div {
+  cursor: pointer;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.sidebar__headerIconsDropdown > div:hover {
+  background-color: rgb(243, 243, 243);
+  border-radius: 5px;
+}
+
+.sidebar__headerIconsDropdown > hr {
+  margin: 5px 0;
+  border: 0.5px solid lightgray;
+}
+
 .sidebar__search {
   display: flex;
   align-items: center;
@@ -77,6 +106,10 @@
   }
 
   .sidebar__header {
+    display: none;
+  }
+
+  .sidebar__headerIconsDropdown {
     display: none;
   }
 

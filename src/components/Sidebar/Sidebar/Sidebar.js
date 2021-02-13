@@ -9,11 +9,15 @@ import {useStateValue} from '../../../context/StateProvider'
 import './Sidebar.css'
 import db from '../../../context/firebase.js'
 import { useHistory } from 'react-router-dom'
+import Backdrop from '../../Backdrop/Backdrop.js'
+
+
 
 function Sidebar() {
     const [rooms, setRooms] = useState([])
     const [{user}, dispatch] = useStateValue()
     const history = useHistory()
+    const [dropdown, setDropdown] = useState(false)
 
     useEffect(() => {
         const unsubscribe = db.collection('rooms').onSnapshot(snapshot => (
@@ -37,6 +41,10 @@ function Sidebar() {
         history.push('/login')
     }
 
+    const clickHorizontalIconHandler = () => {
+        setDropdown(prevState => !prevState)
+    }
+
 
     return (
         <div className="sidebar">
@@ -44,7 +52,7 @@ function Sidebar() {
                 <Avatar src={user?.photoURL} alt="Profile"/>
                 <h1>Chats</h1>
                 <div className="sidebar__headerIcons">
-                    <IconButton onClick={handleLogout}>
+                    <IconButton onClick={clickHorizontalIconHandler}>
                         <MoreHorizIcon />
                     </IconButton>
                     <IconButton>
@@ -55,6 +63,33 @@ function Sidebar() {
                     </IconButton>
                 </div>
             </div>
+
+            {
+                dropdown && (
+                    <>
+                    <Backdrop clicked={clickHorizontalIconHandler} />
+
+                    <div className="sidebar__headerIconsDropdown">
+                        <div>Preferences</div>
+                        <hr/>
+                        <div>Active contacts</div>
+                        <div>Message requests</div>
+                        <div>Hidden chats</div>
+                        <hr/>
+                        <div>Help</div>
+                        <div>Report a Problem</div>
+                        <hr/>
+                        <div>About</div>
+                        <div>Terms</div>
+                        <div>Privacy Policy</div>
+                        <div>Cookie Policy</div>
+                        <hr/>
+                        <div>New! Messenger for Windows</div>
+                        <div onClick={handleLogout}>Log Out</div>
+                    </div>
+                    </>
+                )
+            }
 
             <div className="sidebar__search">
                 <div className="sidebar__searchContainer">
