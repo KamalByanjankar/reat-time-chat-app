@@ -38,7 +38,7 @@ function Sidebar() {
         dispatch({ type: 'LOGOUT' });
         localStorage.removeItem('currentUser');
         localStorage.removeItem('token');
-        history.push('/login')
+        history.push('/')
     }
 
     const clickHorizontalIconHandler = () => {
